@@ -716,8 +716,8 @@ MonoBehaviour:
   playerIdle: {fileID: 1806348958}
   playerHit: {fileID: 327026893}
   cask: {fileID: 8038882782654464330, guid: 71816e90e34de2f428890866198172d6, type: 3}
-  enemyRight: {fileID: 2641717516423681705, guid: e8b947c9508ff3c419c25bdbf4aa6347, type: 3}
-  enemyLeft: {fileID: 526636884591437974, guid: d85a03940ac62a24b9d2d9cecb23c935, type: 3}
+  enemyRight: {fileID: 6638199145012145386, guid: 29ada6fdb9fd7d749afe57bd80d0cb18, type: 3}
+  enemyLeft: {fileID: 5854925725275985184, guid: 30ca0e3441cb6594f8c223676c297d48, type: 3}
   txtPoints: {fileID: 893008287}
 --- !u!4 &1306681251
 Transform:
