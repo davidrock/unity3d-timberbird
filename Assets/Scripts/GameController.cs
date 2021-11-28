@@ -17,6 +17,8 @@ public class GameController : MonoBehaviour
     public GameObject enemyLeft;
     public GameObject timeBar;
     public TextMeshProUGUI txtPoints;
+    public AudioClip soundAttack;
+    public AudioClip soundDeath;
 
     private int _points;
     private List<GameObject> _caskList;
@@ -146,11 +148,13 @@ public class GameController : MonoBehaviour
             {
                 print("Acertou um inimigo");
                 GameOver();
+                GetComponent<AudioSource>().PlayOneShot(soundDeath);
                 return;
             }
         }
 
         AddScore();
+        GetComponent<AudioSource>().PlayOneShot(soundAttack);
     }
 
     private void AddScore()
@@ -171,6 +175,7 @@ public class GameController : MonoBehaviour
         player.GetComponent<Rigidbody2D>().velocity = new Vector2(-4, 10);
         player.GetComponent<Rigidbody2D>().AddTorque(50f);
         timeBar.SendMessage("Stop");
+        GetComponent<AudioSource>().Stop();
         Invoke(nameof(Reload), 4f);
     }
 
