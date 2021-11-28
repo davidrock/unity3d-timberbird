@@ -15,6 +15,7 @@ public class GameController : MonoBehaviour
     public GameObject cask;
     public GameObject enemyRight;
     public GameObject enemyLeft;
+    public GameObject timeBar;
     public TextMeshProUGUI txtPoints;
 
     private int _points;
@@ -25,6 +26,7 @@ public class GameController : MonoBehaviour
     private float _caskHeight;
     private bool _playerDirection;
     private bool _gameOver;
+    private bool _gameStarted;
 
     void Start()
     {
@@ -47,6 +49,13 @@ public class GameController : MonoBehaviour
     {
         _currentPosition = player.transform.position;
         if (!Input.GetButtonDown("Fire1") || _gameOver) return;
+
+        if (!_gameStarted)
+        {
+            _gameStarted = true;
+            timeBar.SendMessage("Started");
+        }
+
         var clickAction = Input.mousePosition.x;
 
         if (clickAction > Convert.ToInt16(Screen.width / 2))
@@ -147,7 +156,10 @@ public class GameController : MonoBehaviour
     private void AddScore()
     {
         if (!_gameOver)
+        {
             txtPoints.text = $"Pontos: {_points++}";
+            timeBar.SendMessage("InscreaseTime");
+        }
     }
 
     private void GameOver()
@@ -158,7 +170,8 @@ public class GameController : MonoBehaviour
         player.GetComponent<Rigidbody2D>().isKinematic = false;
         player.GetComponent<Rigidbody2D>().velocity = new Vector2(-4, 10);
         player.GetComponent<Rigidbody2D>().AddTorque(50f);
-        Invoke(nameof(Reload), 2f);
+        timeBar.SendMessage("Stop");
+        Invoke(nameof(Reload), 4f);
     }
 
     void Reload()
